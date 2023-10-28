@@ -57,6 +57,15 @@ RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v
     mv weewx-seasons-dark/skins/Seasons /etc/weewx/skins/ && \
     rm -rf weewx-seasons-dark
 
+COPY rootfs /
+
+RUN chown -R weewx:weewx /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
+RUN chmod g+w /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
+
+USER weewx
+
+RUN mkdir -p /home/weewx/tmp/client_body /home/weewx/tmp/proxy /home/weewx/tmp/fastcgi /home/weewx/tmp/uswgi /home/weewx/tmp/scgi
+
 RUN <<__DOCKER_EOF__
 cat <<__EOF__ > /home/weewx/nginx.conf
 events {
@@ -88,15 +97,6 @@ http {
 }
 __EOF__
 __DOCKER_EOF__
-
-COPY rootfs /
-
-RUN chown -R weewx:weewx /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
-RUN chmod g+w /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
-
-USER weewx
-
-RUN mkdir -p /home/weewx/tmp/client_body /home/weewx/tmp/proxy /home/weewx/tmp/fastcgi /home/weewx/tmp/uswgi /home/weewx/tmp/scgi
 
 # nginx -c ~/nginx.conf
 CMD ["sh", "-c", "nginx -c ~/nginx.conf && /usr/bin/weewxd --config /etc/weewx/weewx.conf"]
