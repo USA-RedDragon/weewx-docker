@@ -23,6 +23,7 @@ RUN apt-get update && \
         python3-requests \
         python3-paho-mqtt \
         python3-dateutil \
+        python3-ephem \
         python3-dev \
         zlib1g-dev zlib1g \
         nginx \
