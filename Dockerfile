@@ -61,6 +61,7 @@ RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v
     rm -rf weewx-seasons-dark
 
 COPY --chown=root:root rootfs /
+RUN usermod -a -G root weewx
 
 RUN chown -R weewx:weewx /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
 RUN chmod g+w /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
