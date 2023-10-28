@@ -27,6 +27,8 @@ RUN apt-get update && \
         python3-dev \
         zlib1g-dev zlib1g \
         nginx \
+        s6 \
+        doas \
         libjpeg-dev libjpeg8 && \
     curl -fSsL https://weewx.com/keys.html | gpg --dearmor --output /etc/apt/trusted.gpg.d/weewx.gpg && \
     curl -fSsL https://weewx.com/apt/weewx-python3.list | tee /etc/apt/sources.list.d/weewx.list && \
@@ -63,41 +65,5 @@ COPY rootfs /
 RUN chown -R weewx:weewx /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
 RUN chmod g+w /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
 
-USER weewx
 
-RUN mkdir -p /home/weewx/tmp/client_body /home/weewx/tmp/proxy /home/weewx/tmp/fastcgi /home/weewx/tmp/uswgi /home/weewx/tmp/scgi
-
-RUN <<__DOCKER_EOF__
-cat <<__EOF__ > /home/weewx/nginx.conf
-events {
-    worker_connections 1024;
-}
-pid /dev/null;
-http {
-    include /etc/nginx/mime.types;
-    server {
-        listen 3000 default_server;
-        listen [::]:3000 default_server;
-        server_name _;
-        access_log /dev/stdout;
-        error_log /dev/stderr;
-        client_max_body_size 16M;
-
-        client_body_temp_path /home/weewx/tmp/client_body;
-        proxy_temp_path /home/weewx/tmp/proxy;
-        fastcgi_temp_path /home/weewx/tmp/fastcgi;
-        uwsgi_temp_path /home/weewx/tmp/uwsgi;
-        scgi_temp_path /home/weewx/tmp/scgi;
-
-        location / {
-            root /var/www/html/weewx;
-            index index.html index.htm;
-            try_files \$uri \$uri/ =404;
-        }
-    }
-}
-__EOF__
-__DOCKER_EOF__
-
-# nginx -c ~/nginx.conf
-CMD ["sh", "-c", "nginx -c ~/nginx.conf && /usr/bin/weewxd --config /etc/weewx/weewx.conf"]
+CMD ["/bin/s6-svscan", "/etc/s6"]
