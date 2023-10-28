@@ -60,7 +60,7 @@ RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v
     mv weewx-seasons-dark/skins/Seasons /etc/weewx/skins/ && \
     rm -rf weewx-seasons-dark
 
-COPY rootfs /
+COPY --chown=root:root rootfs /
 
 RUN chown -R weewx:weewx /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
 RUN chmod g+w /var/www/html/weewx /etc/weewx /usr/share/weewx /var/lib/weewx
