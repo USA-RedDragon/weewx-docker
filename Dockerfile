@@ -14,6 +14,7 @@ RUN apt-get update && \
         wget \
         curl \
         gnupg \
+        tzdata \
         build-essential \
         ca-certificates \
         libfreetype6-dev \
