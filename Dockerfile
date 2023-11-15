@@ -48,6 +48,9 @@ RUN apt-get update && \
 RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v2.3/weewx-nws-2.3.zip -o /tmp/weewx-nws.zip && \
     wee_extension --install /tmp/weewx-nws.zip && \
     rm /tmp/weewx-nws.zip && \
+    curl -fSsL https://github.com/USA-RedDragon/weewx-prometheus/archive/refs/tags/v1.1.1.zip -o /tmp/weewx-prometheus.zip && \
+    wee_extension --install /tmp/weewx-prometheus.zip && \
+    rm /tmp/weewx-prometheus.zip && \
     curl -fSsL https://github.com/USA-RedDragon/weewxMQTT/archive/refs/heads/master.zip -o /tmp/weewxMQTT.zip && \
     wee_extension --install /tmp/weewxMQTT.zip && \
     rm /tmp/weewxMQTT.zip && \
