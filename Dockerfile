@@ -71,7 +71,10 @@ RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v
     cp -R /tmp/stackedwindrose/skins/* /etc/weewx/skins && \
     rm -rf /tmp/stackedwindrose.tar.gz /tmp && \
     rm -rf /etc/weewx/skins/Seasons/ && \
-    git clone https://github.com/USA-RedDragon/weewx-seasons-dark.git -b ${WEEWX_SEASONS_DARK_SHA} && \
+    git clone https://github.com/USA-RedDragon/weewx-seasons-dark.git && \
+    cd weewx-seasons-dark && \
+    git checkout ${WEEWX_SEASONS_DARK_SHA} && \
+    cd .. && \
     mv weewx-seasons-dark/skins/Seasons /etc/weewx/skins/ && \
     rm -rf weewx-seasons-dark
 
