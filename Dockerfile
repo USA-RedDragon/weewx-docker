@@ -48,7 +48,7 @@ RUN apt-get update && \
 # renovate: datasource=github-releases depName=chaunceygardiner/weewx-nws
 ARG WEEWX_NWS_VERSION=v2.3
 # renovate: datasource=github-tags depName=USA-RedDragon/weewx-prometheus
-ARG WEEWX_PROMETHEUS_VERSION=v1.1.3
+ARG WEEWX_PROMETHEUS_VERSION=v1.1.4
 # renovate: datasource=github-releases depName=gjr80/weewx-stackedwindrose
 ARG WEEWX_STACKEDWINDROSE_VERSION=v3.0.2
 # renovate: sha: datasource=git-refs depName=weewx-mqtt packageName=https://github.com/USA-RedDragon/weewxMQTT branch=master
