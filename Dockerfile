@@ -52,7 +52,7 @@ ARG WEEWX_PROMETHEUS_VERSION=1.1.1
 # renovate: datasource=github-releases depName=gjr80/weewx-stackedwindrose
 ARG WEEWX_STACKEDWINDROSE_VERSION=3.0.1
 # renovate: sha: datasource=git-refs depName=weewx-mqtt packageName=https://github.com/USA-RedDragon/weewxMQTT branch=master
-ARG WEEWX_MQTT_SHA=609b45187377c43390b7b672ddafdd3af027cc13
+ARG WEEWX_MQTT_SHA=778c460c96bfa04bc842abdffdca81b58391188d
 # renovate: sha: datasource=git-refs depName=weewx-seasons-dark packageName=https://github.com/USA-RedDragon/weewx-seasons-dark branch=main
 ARG WEEWX_SEASONS_DARK_SHA=3f2d888d524366f6d977550711a22cfa145d2665
 
