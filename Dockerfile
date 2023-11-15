@@ -54,7 +54,7 @@ ARG WEEWX_STACKEDWINDROSE_VERSION=3.0.1
 # renovate: sha: datasource=git-refs depName=weewx-mqtt packageName=https://github.com/USA-RedDragon/weewxMQTT branch=master
 ARG WEEWX_MQTT_SHA=609b45187377c43390b7b672ddafdd3af027cc13
 # renovate: sha: datasource=git-refs depName=weewx-seasons-dark packageName=https://github.com/USA-RedDragon/weewx-seasons-dark branch=main
-ARG WEEWX_SEASONS_DARK_SHA=89cbccac808e331fd979c513023b260de9ef694b
+ARG WEEWX_SEASONS_DARK_SHA=3f2d888d524366f6d977550711a22cfa145d2665
 
 RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v${WEEWX_NWS_VERSION}/weewx-nws-${WEEWX_NWS_VERSION}.zip -o /tmp/weewx-nws.zip && \
     wee_extension --install /tmp/weewx-nws.zip && \
