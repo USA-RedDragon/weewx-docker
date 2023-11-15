@@ -50,7 +50,7 @@ ARG WEEWX_NWS_VERSION=v2.3
 # renovate: datasource=github-tags depName=USA-RedDragon/weewx-prometheus
 ARG WEEWX_PROMETHEUS_VERSION=v1.1.1
 # renovate: datasource=github-releases depName=gjr80/weewx-stackedwindrose
-ARG WEEWX_STACKEDWINDROSE_VERSION=v3.0.1
+ARG WEEWX_STACKEDWINDROSE_VERSION=v3.0.2
 # renovate: sha: datasource=git-refs depName=weewx-mqtt packageName=https://github.com/USA-RedDragon/weewxMQTT branch=master
 ARG WEEWX_MQTT_SHA=778c460c96bfa04bc842abdffdca81b58391188d
 # renovate: sha: datasource=git-refs depName=weewx-seasons-dark packageName=https://github.com/USA-RedDragon/weewx-seasons-dark branch=main
