@@ -45,22 +45,33 @@ RUN apt-get update && \
         zlib1g-dev && \
     apt-get clean && rm -rf /tmp/setup /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v2.3/weewx-nws-2.3.zip -o /tmp/weewx-nws.zip && \
+# renovate: datasource=github-releases depName=chaunceygardiner/weewx-nws
+ARG WEEWX_NWS_VERSION=2.3
+# renovate: datasource=github-tags depName=USA-RedDragon/weewx-prometheus
+ARG WEEWX_PROMETHEUS_VERSION=1.1.1
+# renovate: datasource=github-releases depName=gjr80/weewx-stackedwindrose
+ARG WEEWX_STACKEDWINDROSE_VERSION=3.0.1
+# renovate: sha: datasource=git-refs depName=weewx-mqtt packageName=https://github.com/USA-RedDragon/weewxMQTT branch=master
+ARG WEEWX_MQTT_SHA=609b45187377c43390b7b672ddafdd3af027cc13
+# renovate: sha: datasource=git-refs depName=weewx-seasons-dark packageName=https://github.com/USA-RedDragon/weewx-seasons-dark branch=main
+ARG WEEWX_SEASONS_DARK_SHA=89cbccac808e331fd979c513023b260de9ef694b
+
+RUN curl -fSsL https://github.com/chaunceygardiner/weewx-nws/releases/download/v${WEEWX_NWS_VERSION}/weewx-nws-${WEEWX_NWS_VERSION}.zip -o /tmp/weewx-nws.zip && \
     wee_extension --install /tmp/weewx-nws.zip && \
     rm /tmp/weewx-nws.zip && \
-    curl -fSsL https://github.com/USA-RedDragon/weewx-prometheus/archive/refs/tags/v1.1.1.zip -o /tmp/weewx-prometheus.zip && \
+    curl -fSsL https://github.com/USA-RedDragon/weewx-prometheus/archive/refs/tags/v${WEEWX_PROMETHEUS_VERSION}.zip -o /tmp/weewx-prometheus.zip && \
     wee_extension --install /tmp/weewx-prometheus.zip && \
     rm /tmp/weewx-prometheus.zip && \
-    curl -fSsL https://github.com/USA-RedDragon/weewxMQTT/archive/refs/heads/master.zip -o /tmp/weewxMQTT.zip && \
+    curl -fSsL https://github.com/USA-RedDragon/weewxMQTT/archive/${WEEWX_MQTT_SHA}.zip -o /tmp/weewxMQTT.zip && \
     wee_extension --install /tmp/weewxMQTT.zip && \
     rm /tmp/weewxMQTT.zip && \
-    curl -fSsL https://github.com/gjr80/weewx-stackedwindrose/releases/download/v3.0.1/stackedwindrose-3.0.1.tar.gz -o /tmp/stackedwindrose.tar.gz && \
+    curl -fSsL https://github.com/gjr80/weewx-stackedwindrose/releases/download/v${WEEWX_STACKEDWINDROSE_VERSION}/stackedwindrose-${WEEWX_STACKEDWINDROSE_VERSION}.tar.gz -o /tmp/stackedwindrose.tar.gz && \
     tar -zxvf /tmp/stackedwindrose.tar.gz -C /tmp && \
     cp /tmp/stackedwindrose/bin/user/stackedwindrose.py /usr/share/weewx/user && \
     cp -R /tmp/stackedwindrose/skins/* /etc/weewx/skins && \
     rm -rf /tmp/stackedwindrose.tar.gz /tmp && \
     rm -rf /etc/weewx/skins/Seasons/ && \
-    git clone https://github.com/USA-RedDragon/weewx-seasons-dark.git && \
+    git clone https://github.com/USA-RedDragon/weewx-seasons-dark.git -b ${WEEWX_SEASONS_DARK_SHA} && \
     mv weewx-seasons-dark/skins/Seasons /etc/weewx/skins/ && \
     rm -rf weewx-seasons-dark
 
