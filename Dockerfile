@@ -70,7 +70,7 @@ RUN NWS_NONV_VERSION=$(echo ${WEEWX_NWS_VERSION} | sed 's/v//g') && \
     curl -fSsL https://github.com/gjr80/weewx-stackedwindrose/releases/download/${WEEWX_STACKEDWINDROSE_VERSION}/stackedwindrose-${STACKED_WINDROSE_NONV_VERSION}.tar.gz -o /tmp/stackedwindrose.tar.gz && \
     tar -zxvf /tmp/stackedwindrose.tar.gz -C /tmp && \
     cp /tmp/stackedwindrose/bin/user/stackedwindrose.py /usr/share/weewx/user && \
-    cp -R /tmp/stackedwindrose/bin/user/skins/* /etc/weewx/skins && \
+    cp -R /tmp/stackedwindrose/skins/* /etc/weewx/skins && \
     rm -rf /tmp/stackedwindrose.tar.gz /tmp && \
     rm -rf /etc/weewx/skins/Seasons/ && \
     git clone https://github.com/USA-RedDragon/weewx-seasons-dark.git && \
